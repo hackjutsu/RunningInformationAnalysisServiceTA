@@ -1,0 +1,6 @@
+server:
+  port: 9000
+spring:
+  application:
+    admin:
+      jmx-name: running-information-analysis-service
