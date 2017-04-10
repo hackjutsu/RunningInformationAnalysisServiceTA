@@ -9,7 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface RunningInformationRepository extends JpaRepository<RunningInformation, Long>{
     Page<RunningInformation> findByHeartRateGreaterThan(
-            @Param("heartRate") double heartRate,
+            @Param("heartRate") int heartRate,
+            Pageable pageable
+    );
+
+    Page<RunningInformation> findByHeartRate(
+            @Param("heartRate") int heartRate,
             Pageable pageable
     );
 }

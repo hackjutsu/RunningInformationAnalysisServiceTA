@@ -10,7 +10,9 @@ public interface RunningInformationService {
 
     public List<RunningInformation> saveRunningInformation(List<RunningInformation> runningInformationList);
 
-    public Page<RunningInformation> findByHeartRateGreaterThan(double heartRate, Pageable pageable);
+    public Page<RunningInformation> findByHeartRate(int heartRate, Pageable pageable);
+
+    public Page<RunningInformation> findByHeartRateGreaterThan(int heartRate, Pageable pageable);
 
     public Page<RunningInformation> findAllRunningInformationOrderByHeathLevel(Pageable pageable);
 

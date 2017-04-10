@@ -11,13 +11,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class RunningInformationQueryController {
+    private final String DBG = "-----> ";
+
+    private final String kDefaultPage = "0";
+    private final String kDefaultItemPerPage = "30";
+
     @Autowired
     private RunningInformationService runningInformationService;
 
-    @RequestMapping(value = "/running", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void upload(@RequestBody List<RunningInformation> runningInformationList){
+        System.out.println(DBG + "The length of the list is " + String.valueOf(runningInformationList.size()));
         runningInformationService.saveRunningInformation(runningInformationList);
     }
 
@@ -26,11 +33,21 @@ public class RunningInformationQueryController {
         runningInformationService.deleteAll();
     }
 
-    @RequestMapping(value = "/running/{heartRate}", method = RequestMethod.GET)
+    @RequestMapping(value = "/heartRateGreaterThan/{heartRate}", method = RequestMethod.GET)
     public Page<RunningInformation> findByHeartRateGreaterThan(
-            @PathVariable double heartRate,
-            @RequestParam(name = "page", required = false) Integer page,
-            @RequestParam(name = "size", required = false) Integer size) {
+            @PathVariable Integer heartRate,
+            @RequestParam(name = "page", required = false, defaultValue = kDefaultPage) Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = kDefaultItemPerPage) Integer size) {
+
         return this.runningInformationService.findByHeartRateGreaterThan(heartRate, new PageRequest(page, size));
+    }
+
+    @RequestMapping(value = "/heartRate/{heartRate}", method = RequestMethod.GET)
+    public Page<RunningInformation> findByHeartRate(
+            @PathVariable Integer heartRate,
+            @RequestParam(name = "page", required = false, defaultValue = kDefaultPage) Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = kDefaultItemPerPage) Integer size) {
+
+        return this.runningInformationService.findByHeartRate(heartRate, new PageRequest(page, size));
     }
 }

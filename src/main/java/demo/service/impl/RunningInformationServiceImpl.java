@@ -5,7 +5,6 @@ import demo.domain.RunningInformation;
 import demo.domain.RunningInformationRepository;
 import demo.service.RunningInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,10 +14,14 @@ import java.util.List;
 @Service
 public class RunningInformationServiceImpl implements RunningInformationService {
 
+    private final String DBG = "-----> ";
+
     private RunningInformationRepository runningInformationRepository;
 
+    // constructor dependency injection
     @Autowired
     public RunningInformationServiceImpl(RunningInformationRepository runningInformationRepository) {
+        System.out.println(DBG + "Inside constructor of RunningInformationServiceImpl");
         this.runningInformationRepository = runningInformationRepository;
     }
 
@@ -28,9 +31,13 @@ public class RunningInformationServiceImpl implements RunningInformationService 
     }
 
     @Override
-    public Page<RunningInformation> findByHeartRateGreaterThan(
-            double heartRate,
-            Pageable pageable) {
+    public Page<RunningInformation> findByHeartRate(int heartRate, Pageable pageable) {
+        System.out.println(DBG + "Inside findByHeartRate method with HR " + String.valueOf(heartRate));
+        return runningInformationRepository.findByHeartRate(heartRate, pageable);
+    }
+
+    @Override
+    public Page<RunningInformation> findByHeartRateGreaterThan(int heartRate, Pageable pageable) {
         return runningInformationRepository.findByHeartRateGreaterThan(heartRate, pageable);
     }
 
