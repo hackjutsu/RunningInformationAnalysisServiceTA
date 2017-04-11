@@ -15,6 +15,10 @@ import java.util.Random;
 @Table(name = "RUNNING_INFORMATION")
 public class RunningInformation {
 
+    public enum HealthWarningLevel {
+        LOW, NORMAL, HIGH;
+    }
+
     private final String DBG = "-----> ";
 
     @Id
@@ -34,6 +38,7 @@ public class RunningInformation {
     private double totalRunningTIme;
 
     private int heartRate;
+    private HealthWarningLevel healthWarningLevel;
 
     private Date timestamp = new Date();
 
@@ -69,6 +74,16 @@ public class RunningInformation {
         this.heartRate = _getRandomHeartRate(60, 200);
         this.timestamp = new Date();
         this.userInfo = userInfo;
+
+        if (this.heartRate > 120) {
+            this.healthWarningLevel = HealthWarningLevel.HIGH;
+        } else if (this.heartRate > 75) {
+            this.healthWarningLevel = HealthWarningLevel.NORMAL;
+        } else if (this.heartRate >= 60) {
+            this.healthWarningLevel = HealthWarningLevel.LOW;
+        } else {
+            // Handle abnormal heart rates
+        }
 
         System.out.println(DBG + this.heartRate);
     }
