@@ -39,11 +39,11 @@ address
 
 3. 要求返回结果按照`healthWarningLevel`从高到低进行排列，每页显示两个数据
 
->提示：
->HealthWarningLevel 由heartRate 大小决定
->如果heartRate>=60 && <=75 healthWarningLevel = “LOW”
->如果heartRate>75 && <=120 healthWarningLevel = “NORMAL”
->如果heartRate>120 healthWarningLevel = “HIGH”
+>**提示**
+>`HealthWarningLevel`由`heartRate`大小决定
+> - 如果heartRate>=60 && <=75 healthWarningLevel = “LOW”
+> - 如果heartRate>75 && <=120 healthWarningLevel = “NORMAL”
+> - 如果heartRate>120 healthWarningLevel = “HIGH”
 
 4. REST API能支持delete by running ID 操作
 
