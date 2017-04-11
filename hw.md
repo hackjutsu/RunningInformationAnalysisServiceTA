@@ -1,4 +1,4 @@
-# 实现RunningInformationAnalysisService
+# 实现 RunningInformationAnalysisService
 
 功能要求：
 每一个RunningInformation都包含
@@ -22,9 +22,9 @@ address
 `HearRate`初始值为0，要求当数据插入数据库时候生成一个60-200中间的随机数
 
 ## 要求
-`RunningInformation` 存储在`RUNNING_ANALYSIS` 表里
+1. `RunningInformation` 存储在`RUNNING_ANALYSIS` 表里
 
-要求设计REST API 能够返回符合如下条件的JSON Response:
+2. 要求设计REST API 能够返回符合如下条件的JSON Response:
 ```
 {
     "runningId": "7c08973d-bed4-4cbd-9c28-9282a02a6032",
@@ -37,20 +37,19 @@ address
 }
 ```
 
-要求返回结果按照`healthWarningLevel`从高到低进行排列，每页显示两个数据
-
-同时REST API能支持delete by running ID 操作
+3. 要求返回结果按照`healthWarningLevel`从高到低进行排列，每页显示两个数据
 
 >提示：
-HealthWarningLevel 由heartRate 大小决定
-如果heartRate>=60 && <=75 healthWarningLevel = “LOW”
-如果heartRate>75 && <=120 healthWarningLevel = “NORMAL”
-如果heartRate>120 healthWarningLevel = “HIGH”
+>HealthWarningLevel 由heartRate 大小决定
+>如果heartRate>=60 && <=75 healthWarningLevel = “LOW”
+>如果heartRate>75 && <=120 healthWarningLevel = “NORMAL”
+>如果heartRate>120 healthWarningLevel = “HIGH”
 
+4. REST API能支持delete by running ID 操作
 
-数据库要求用MySQL实现
+5. 数据库要求用MySQL实现
 
-JSON输入
+## JSON输入
 ```
 [
   {
