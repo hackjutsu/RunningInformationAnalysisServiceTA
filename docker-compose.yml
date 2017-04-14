@@ -1,6 +1,5 @@
-running-information-database:
+runningInformationDatabase:
   image: mysql
-  container_name: running-information-database
   ports:
     - "3306:3306"
   environment:
